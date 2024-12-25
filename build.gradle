@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.ps'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+wrapper {
+	gradleVersion '8.8'
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = []
+		}
+		resources {
+			srcDirs = []
+		}
+	}
+	test {
+		java {
+			srcDirs = []
+		}
+		resources {
+			srcDirs = []
+		}
+	}
+}
+
+
+
+
+test {
+    useJUnitPlatform()
+}
+

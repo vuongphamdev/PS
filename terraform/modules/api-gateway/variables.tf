@@ -12,3 +12,8 @@ variable "path_part" {
   description = "The path part of the API Gateway resource"
   type        = string
 }
+
+variable "lambda_integration_uri" {
+  description = "The URI of the Lambda function to integrate with the API Gateway"
+  type = string
+}

@@ -9,7 +9,7 @@ module "cognito" {
 }
 
 module "lambda" {
-  source = "./modules/lambda"
+  source = "./modules/lambda/auth"
   function_name = "RegisterUserFunction"
   handler = "lambda_function.lambda_handler"
   runtime = "python3.8"
@@ -20,7 +20,7 @@ module "lambda" {
 }
 
 module "api_gateway" {
-  source = "./modules/api_gateway"
+  source = "./modules/api-gateway"
   api_name = "MyAPI"
   api_description = "API for managing user registration"
   path_part = "register"

@@ -1,0 +1,49 @@
+plugins {
+	id 'com.pswidersk.python-plugin'
+	id 'com.diffplug.spotless'
+	id 'distribution'
+}
+
+apply from: rootProject.file('gradle/spotless-gradle.gradle')
+
+pythonPlugin {
+	pythonVersion = "3.11.5"
+}
+
+ext {
+	pythonWorkDir = layout.buildDirectory.dir('python/working').get()
+}
+
+tasks.register('pipInstall', com.pswidersk.gradle.python.VenvTask) {
+	Directory distDir = layout.projectDirectory.dir('src/main/dist')
+
+	inputs.files(distDir.asFileTree)
+	outputs.files(pythonWorkDir.asFileTree)
+	workingDir.set(distDir)
+	venvExec = 'pip'
+	args = [
+		'install',
+		'-r',
+		'requirements.txt',
+		'-t',
+		pythonWorkDir
+	]
+}
+
+distributions {
+	main {
+		contents {
+			from pythonWorkDir
+			exclude('**/__pycache__', 'venv')
+			into '/'
+		}
+	}
+}
+
+tasks.named('distZip').configure {
+	dependsOn('pipInstall')
+	preserveFileTimestamps = false
+	reproducibleFileOrder = true
+}
+tasks.named('distTar').configure {dependsOn('pipInstall') }
+tasks.named('installDist').configure {dependsOn('pipInstall') }

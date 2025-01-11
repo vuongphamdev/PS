@@ -1,1 +1,0 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"api_gateway","Source":"./modules/api-gateway","Dir":"modules/api-gateway"},{"Key":"cognito","Source":"./modules/cognito","Dir":"modules/cognito"},{"Key":"lambda","Source":"./modules/lambda/auth","Dir":"modules/lambda/auth"}]}
